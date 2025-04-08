@@ -1,0 +1,10 @@
+# pendencias
+
+obrigatório
+[x] filtrar rotas por ano
+[] implantar swagger (documentação)
+
+opcional
+[] implantar autenticacao
+[] implantar db (dados offline)
+
