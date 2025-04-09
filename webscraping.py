@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from db import obtemDataOffProducao, obtemDataOffProcessamento
+from db import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao
 
 # obtem dados   
 def obtemDados(url): 
@@ -66,8 +66,8 @@ def obtemProcessamento(ano):
     urls= {
         "viniferas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_01"],
         "americanas_hibridas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_02"],
-        #"uvas_mesa" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_03"],
-        #"sem_classificacao" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_04"] 
+        "uvas_mesa" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_03"],
+        "sem_classificacao" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_04"] 
     }
 
     # dicionario de dados
@@ -105,12 +105,18 @@ def obtemComercializacao(ano):
         url= urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
+        # obtem dados online
         if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas
-        else:
-            # obtem dados do banco
-            data[aba]= {"error" : "teste"}
+            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas        
 
+        # obtem dados offline
+        else:            
+            json, status_code= obtemDataOffComercializacao(aba, ano)    
+            if status_code != 200:                
+                return {"error": "dados não encontrados"}
+            else:
+                data[aba]= json
+            
     return data
 
 def obtemImportacao(ano):
