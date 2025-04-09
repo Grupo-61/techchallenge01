@@ -8,3 +8,10 @@ opcional
 [] implantar autenticacao
 [] implantar db (dados offline)
 
+# git
+git init
+git status
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Grupo-61/techchalenge01
+git push -u -f origin main
