@@ -1,9 +1,11 @@
-import requests
+import requests, json
 from bs4 import BeautifulSoup
 import pandas as pd
-from db import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao
+from obtemDadosOffline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
+from urls import obtemUrls
 
-# obtem dados   
+# Obtem dados url
+  
 def obtemDados(url): 
     response= requests.get(url)
 
@@ -35,12 +37,13 @@ def obtemDados(url):
     # converte os dados em um Dataframe do pandas
     return pd.DataFrame(data[1:], columns=data[0]), response.status_code 
 
-def obtemProducao(ano):
-    urls= {
-        "producao" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_02"]
-    }
+# obtem Json Produção
 
-    # dicionario de dados
+def obtemJsonProducao(ano):
+    
+    # obtenho url dos dados
+    urls= obtemUrls("Producao", ano)
+
     data= {}
 
     # itero sobre as urls da aba Produção
@@ -49,8 +52,12 @@ def obtemProducao(ano):
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
-        if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas        
+        if status_code == 200:     
+
+            # trato dados
+            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json= json.replace("-", "0.00").replace("nd", "0.00")
+            data[aba]= json # guardo json para cada aba  
 
         # obtem dados offline
         else:            
@@ -58,19 +65,17 @@ def obtemProducao(ano):
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json
+                data[aba]= json # guardo json para cada aba  
             
     return data
 
-def obtemProcessamento(ano):
-    urls= {
-        "viniferas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_01"],
-        "americanas_hibridas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_02"],
-        "uvas_mesa" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_03"],
-        "sem_classificacao" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_03&subopcao=subopt_04"] 
-    }
+# Obtem Json Processamento
 
-    # dicionario de dados
+def obtemJsonProcessamento(ano):
+
+    # obtenho url dos dados
+    urls= obtemUrls("Processamento", ano)
+
     data= {}
 
     # itero sobre as urls da aba processamento
@@ -79,8 +84,12 @@ def obtemProcessamento(ano):
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
-        if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas        
+        if status_code == 200:            
+
+            # trato dados
+            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json= json.replace("-", "0").replace("nd", "0") 
+            data[aba]= json # guardo json para cada aba        
 
         # obtem dados offline
         else:            
@@ -88,16 +97,17 @@ def obtemProcessamento(ano):
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json
+                data[aba]= json # guardo json para cada aba  
             
     return data
 
-def obtemComercializacao(ano):
-    urls= {
-        "producao" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_04"]
-    }
+# obtem Json Comercialização
 
-    # dicionario de dados
+def obtemJsonComercializacao(ano):
+
+    # obtenho url dos dados
+    urls= obtemUrls("Processamento", ano)
+
     data= {}
 
     # itero sobre as urls da aba Comercializacao
@@ -106,8 +116,12 @@ def obtemComercializacao(ano):
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
-        if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas        
+        if status_code == 200:            
+
+            # trato dados
+            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json= json.replace("-", "0").replace("nd", "0") 
+            data[aba]= json # guardo json para cada aba     
 
         # obtem dados offline
         else:            
@@ -115,20 +129,17 @@ def obtemComercializacao(ano):
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json
+                data[aba]= json # guardo json para cada aba  
             
     return data
 
-def obtemImportacao(ano):
-    urls= {
-        "vinhos_mesa" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_05&subopcao=subopt_01"],
-		"espumantes" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_05&subopcao=subopt_02"],
-		"uvas_frescas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_05&subopcao=subopt_03"],
-		"uvas_passas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_05&subopcao=subopt_04"],
-		"suco_uva" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_05&subopcao=subopt_05"]
-    }
+# Obtem Json Importação
 
-    # dicionario de dados
+def obtemJsonImportacao(ano):
+
+    # obtenho url dos dados
+    urls= obtemUrls("Importacao", ano)
+
     data= {}
 
     # itero sobre as urls da aba Importacao
@@ -136,23 +147,31 @@ def obtemImportacao(ano):
         url= urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas
-        else:
-            # obtem dados do banco
-            data[aba]= {"error" : "teste"}
+        # obtem dados online
+        if status_code == 200:            
 
+            # trato dados
+            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json= json.replace("-", "0").replace("nd", "0") 
+            data[aba]= json # guardo json para cada aba     
+
+        # obtem dados offline
+        else:            
+            json, status_code= obtemDataOffImportacao(aba, ano)    
+            if status_code != 200:                
+                return {"error": "dados não encontrados"}
+            else:
+                data[aba]= json # guardo json para cada aba  
+            
     return data
 
-def obtemExportacao(ano):
-    urls= {
-        "vinhos_mesa" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_06&subopcao=subopt_01"],
-		"espumantes" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_06&subopcao=subopt_02"],
-		"uvas_frescas" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_06&subopcao=subopt_03"],
-		"suco_uva" : ["http://vitibrasil.cnpuv.embrapa.br/index.php?ano=" + str(ano) + "&opcao=opt_06&subopcao=subopt_04"]
-    }
+# Obtem Json Exportação
 
-    # dicionario de dados
+def obtemJsonExportacao(ano):
+
+    # obtenho url dos dados
+    urls= obtemUrls("Exportacao", ano)    
+
     data= {}
 
     # itero sobre as urls da aba Exportação
@@ -160,10 +179,20 @@ def obtemExportacao(ano):
         url= urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        if status_code == 200:
-            data[aba]= df.to_json(orient='records', indent=4) # guardo dados de todas as abas
-        else:
-            # obtem dados do banco
-            data[aba]= {"error" : "teste"}
+        # obtem dados online
+        if status_code == 200:            
 
+            # trato dados
+            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json= json.replace("-", "0").replace("nd", "0") 
+            data[aba]= json # guardo json para cada aba     
+
+        # obtem dados offline
+        else:            
+            json, status_code= obtemDataOffExportacao(aba, ano)    
+            if status_code != 200:                
+                return {"error": "dados não encontrados"}
+            else:
+                data[aba]= json # guardo json para cada aba  
+            
     return data
