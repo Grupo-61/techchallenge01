@@ -1,10 +1,14 @@
-# pendencias
+# git
 
-obrigatório
-[x] filtrar rotas por ano
-[] implantar swagger (documentação)
+git init
+git status
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Grupo-61/techchalenge01
+git push -u -f origin main
 
-opcional
-[] implantar autenticacao
-[] implantar db (dados offline)
 
+# flask
+
+flask --app app.py run --debug # modo debug, porta padrao 5000
+flask run -p 5100 --debug # modo debug, porta 5100 
