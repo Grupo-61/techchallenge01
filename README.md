@@ -14,3 +14,4 @@ Testando as consultas via navegador
 
 Link: http://127.0.0.1:5000/comercializacao/ano=2016
 
+
