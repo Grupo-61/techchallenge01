@@ -1,8 +1,8 @@
 import requests, json
 from bs4 import BeautifulSoup
 import pandas as pd
-from obtemDadosOffline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
-from urls import obtemUrls
+from .obtemDadosOffline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
+from .urls import obtemUrls
 
 # Obtem dados url
   

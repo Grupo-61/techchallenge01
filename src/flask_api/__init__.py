@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_caching import Cache
-from flask_api.rotas_api import rotas_bp
+from .rotas_api import rotas_bp
 # Importe outros blueprints conforme necessário
 
 # Inicializar a aplicação Flask

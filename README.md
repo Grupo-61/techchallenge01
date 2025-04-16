@@ -8,6 +8,10 @@ $ python -m venv env
 
 Executando o servidor Flask a partir do diretório raiz do projeto
 
+Ativando o ambiente virtual
+
+$ source env/Scripts/activate 
+
 $ flask run
 
 Testando as consultas via navegador
