@@ -3,6 +3,7 @@
 
 ### dotenv ###
 .env
+venv
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -188,3 +189,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,dotenv
+.qodo
