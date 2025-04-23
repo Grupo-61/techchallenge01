@@ -1,32 +1,52 @@
 import requests, json
 from bs4 import BeautifulSoup
 import pandas as pd
-from .obtemDadosOffline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
+import logging
+from .obtem_dados_offline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
 from .urls import obtemUrls
+
+# Configuração do logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+console_handler.setFormatter(formatter)
+
+logger.addHandler(console_handler)
+
 
 # Obtem dados url
   
 def obtemDados(url): 
-    response= requests.get(url)
+    logger.info(f"Obtendo dados da URL: {url}")
 
-    # verifica se requisição bem-sucedida
-    response.raise_for_status()
+    try:
+        response= requests.get(url)
+
+        # verifica se requisição bem-sucedida
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Erro ao acessar a URL {url}: {e}")
+        return pd.DataFrame(), response.status_code if response else 500
 
     # retorna erro conexao
     if response.status_code != 200:
         return pd.DataFrame(), response.status_code
 
     # parseia ao HTML da página usando o BeautifulSoup
-    soup= BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, 'html.parser')
 
     # encontra a tabela específica pela classe
-    table= soup.find('table', {'class': 'tb_base tb_dados'})
+    table = soup.find('table', {'class': 'tb_base tb_dados'})
 
     # extrai as linhas da tabela
-    rows= table.find_all('tr')
+    rows = table.find_all('tr')
 
     # lista para armazenar os dados
-    data= []
+    data = []
 
     # itera sobre as linhas e extrai o texto das células
     for row in rows:
@@ -42,9 +62,9 @@ def obtemDados(url):
 def obtemJsonProducao(ano):
     
     # obtenho url dos dados
-    urls= obtemUrls("Producao", ano)
+    urls = obtemUrls("Producao", ano)
 
-    data= {}
+    data = {}
 
     # itero sobre as urls da aba Produção
     for aba in urls:       
@@ -55,17 +75,17 @@ def obtemJsonProducao(ano):
         if status_code == 200:     
 
             # trato dados
-            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json= json.replace("-", "0.00").replace("nd", "0.00")
-            data[aba]= json # guardo json para cada aba  
+            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json = json.replace("-", "0.00").replace("nd", "0.00")
+            data[aba] = json # guardo json para cada aba  
 
         # obtem dados offline
         else:            
-            json, status_code= obtemDataOffProducao(aba, ano)    
+            json, status_code = obtemDataOffProducao(aba, ano)    
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json # guardo json para cada aba  
+                data[aba] = json # guardo json para cada aba  
             
     return data
 
@@ -74,30 +94,30 @@ def obtemJsonProducao(ano):
 def obtemJsonProcessamento(ano):
 
     # obtenho url dos dados
-    urls= obtemUrls("Processamento", ano)
+    urls = obtemUrls("Processamento", ano)
 
-    data= {}
+    data = {}
 
     # itero sobre as urls da aba processamento
     for aba in urls:       
-        url= urls[aba][0]   # obtenho a url        
+        url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
         if status_code == 200:            
 
             # trato dados
-            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json= json.replace("-", "0").replace("nd", "0") 
-            data[aba]= json # guardo json para cada aba        
+            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json = json.replace("-", "0").replace("nd", "0") 
+            data[aba] = json # guardo json para cada aba        
 
         # obtem dados offline
         else:            
-            json, status_code= obtemDataOffProcessamento(aba, ano)    
+            json, status_code = obtemDataOffProcessamento(aba, ano)    
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json # guardo json para cada aba  
+                data[aba] = json # guardo json para cada aba  
             
     return data
 
@@ -106,30 +126,30 @@ def obtemJsonProcessamento(ano):
 def obtemJsonComercializacao(ano):
 
     # obtenho url dos dados
-    urls= obtemUrls("Processamento", ano)
+    urls = obtemUrls("Processamento", ano)
 
-    data= {}
+    data = {}
 
     # itero sobre as urls da aba Comercializacao
     for aba in urls:       
-        url= urls[aba][0]   # obtenho a url        
+        url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
         if status_code == 200:            
 
             # trato dados
-            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json= json.replace("-", "0").replace("nd", "0") 
-            data[aba]= json # guardo json para cada aba     
+            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json = json.replace("-", "0").replace("nd", "0") 
+            data[aba] = json # guardo json para cada aba     
 
         # obtem dados offline
         else:            
-            json, status_code= obtemDataOffComercializacao(aba, ano)    
+            json, status_code = obtemDataOffComercializacao(aba, ano)    
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json # guardo json para cada aba  
+                data[aba] = json # guardo json para cada aba  
             
     return data
 
@@ -138,30 +158,30 @@ def obtemJsonComercializacao(ano):
 def obtemJsonImportacao(ano):
 
     # obtenho url dos dados
-    urls= obtemUrls("Importacao", ano)
+    urls = obtemUrls("Importacao", ano)
 
-    data= {}
+    data = {}
 
     # itero sobre as urls da aba Importacao
     for aba in urls:       
-        url= urls[aba][0]   # obtenho a url        
+        url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
         if status_code == 200:            
 
             # trato dados
-            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json= json.replace("-", "0").replace("nd", "0") 
-            data[aba]= json # guardo json para cada aba     
+            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json = json.replace("-", "0").replace("nd", "0") 
+            data[aba] = json # guardo json para cada aba     
 
         # obtem dados offline
         else:            
-            json, status_code= obtemDataOffImportacao(aba, ano)    
+            json, status_code = obtemDataOffImportacao(aba, ano)    
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json # guardo json para cada aba  
+                data[aba] = json # guardo json para cada aba  
             
     return data
 
@@ -170,29 +190,29 @@ def obtemJsonImportacao(ano):
 def obtemJsonExportacao(ano):
 
     # obtenho url dos dados
-    urls= obtemUrls("Exportacao", ano)    
+    urls = obtemUrls("Exportacao", ano)    
 
-    data= {}
+    data = {}
 
     # itero sobre as urls da aba Exportação
     for aba in urls:       
-        url= urls[aba][0]   # obtenho a url        
+        url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
         # obtem dados online
         if status_code == 200:            
 
             # trato dados
-            json= df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json= json.replace("-", "0").replace("nd", "0") 
-            data[aba]= json # guardo json para cada aba     
+            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+            json = json.replace("-", "0").replace("nd", "0") 
+            data[aba] = json # guardo json para cada aba     
 
         # obtem dados offline
         else:            
-            json, status_code= obtemDataOffExportacao(aba, ano)    
+            json, status_code = obtemDataOffExportacao(aba, ano)    
             if status_code != 200:                
                 return {"error": "dados não encontrados"}
             else:
-                data[aba]= json # guardo json para cada aba  
+                data[aba] = json # guardo json para cada aba  
             
     return data

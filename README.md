@@ -14,8 +14,10 @@ $ source env/Scripts/activate
 
 $ flask run
 
+Ou executar com o debug ativado
+
+$ flask run --debug
+
 Testando as consultas via navegador
 
 Link: http://127.0.0.1:5000/comercializacao/ano=2016
-
-

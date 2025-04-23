@@ -21,4 +21,6 @@ def create_app():
     # Registrar blueprints
     app.register_blueprint(rotas_bp)
 
+    app.debug = True  # Ativar o modo de depuração para desenvolvimento
+
     return app
