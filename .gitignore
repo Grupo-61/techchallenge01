@@ -197,5 +197,8 @@ pyrightconfig.json
 pyvenv.cfg
 pip-selfcheck.json
 
+# Vercel
+.vercel
+
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,dotenv
 .qodo

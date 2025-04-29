@@ -95,6 +95,22 @@ Testando as consultas localmente via navegador
 
 Link: http://127.0.0.1:5000/comercializacao/ano=2016
 
+
+### 🌐 Como testar localmente com o Vercel:
+
+1. Instale o Vercel CLI:
+   ```bash
+   npm install -g vercel
+
+2. Execute o projeto localmente:
+   ```bash
+    vercel dev
+
+3. Acesse:
+   ```bash
+    http://localhost:3000/api
+
+
 ## Configuração e implantação no Vercel
 
 Detalhar os passos para implantar no Vercel
