@@ -2,11 +2,13 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,venv,dotenv
 
 
-## vscode
-.vscode
-
 ## qodo ##
 .qodo
+
+### visualcode
+.vscode
+.vscode-test
+
 
 ### dotenv ###
 .env
