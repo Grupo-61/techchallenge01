@@ -1,7 +1,9 @@
 from flask import Flask
 from flask_caching import Cache
 from .rotas_api import rotas_bp
-# Importe outros blueprints conforme necessário
+
+from .swagger.config import api
+from .swagger.rotas_api_doc import ns_producao
 
 # Inicializar a aplicação Flask
 cache = Cache()
@@ -21,6 +23,10 @@ def create_app():
     # Registrar blueprints
     app.register_blueprint(rotas_bp)
 
+    api.init_app(app)
+    api.add_namespace(ns_producao)
+
     app.debug = True  # Ativar o modo de depuração para desenvolvimento
+
 
     return app

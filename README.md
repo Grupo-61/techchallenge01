@@ -127,7 +127,8 @@ python -m pytest
 ```
 
 ## Swagger
-
+- link da biblioteca: https://flask-restx.readthedocs.io/en/latest/
+- link do material de referencia: https://medium.com/@gbmsaraujo/usando-swagger-para-documentar-uma-api-em-flask-c9cde85910f0
 
 ## Insominia
 
@@ -137,3 +138,6 @@ python -m pytest
 
 ## Licença
 
+
+## Referências
+- https://www.makeareadme.com/
