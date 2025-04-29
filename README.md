@@ -104,6 +104,7 @@ Detalhar os passos para implantar no Vercel
 
 - Com as bibliotecas `pytest` e `unittest` instaladas
 - Executar o seguinte comando no terminal na raiz do projeto
+- Incluir cenários de testes
 
 ```bash
 python -m pytest
@@ -114,6 +115,9 @@ python -m pytest
 
 ## Insominia
 
+
 ## Autores
 
+
 ## Licença
+
