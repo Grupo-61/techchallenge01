@@ -30,7 +30,7 @@ def obtemDados(url):
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         logging.error(f"Erro ao acessar a URL {url}: {e}")
-        return pd.DataFrame(), 500
+        return pd.DataFrame(), response.status_code if response else 500
 
     # retorna erro conexao
     if response.status_code != 200:
@@ -45,6 +45,9 @@ def obtemDados(url):
     # extrai as linhas da tabela
     rows = table.find_all('tr')
 
+    # controle cabecalho
+    num_rows= 0
+
     # lista para armazenar os dados
     data = []
 
@@ -52,7 +55,17 @@ def obtemDados(url):
     for row in rows:
         cells= row.find_all({'th', 'td'})
         cells_text= [cell.get_text(strip=True) for cell in cells]
-        data.append(cells_text)
+
+        # cabecalho
+        if num_rows == 0:
+            data.append(cells_text)      
+            num_rows= num_rows + 1      
+
+        # dados
+        else:
+            cells_text[1]= float(cells_text[1].replace(".", "").replace("-", "0").replace("nd", "0"))
+            #print(cells_text[1])
+            data.append(cells_text)
 
     # converte os dados em um Dataframe do pandas
     return pd.DataFrame(data[1:], columns=data[0]), response.status_code 
@@ -71,21 +84,24 @@ def obtemJsonProducao(ano):
         url= urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        # obtem dados online
-        if status_code == 200:     
+        # conexão ok
+        if status_code == 200:
+            
+            # obtem dados online
+            if df.iloc[:,1].max() > 0:
 
-            # trato dados
-            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json = json.replace("-", "0.00").replace("nd", "0.00")
-            data[aba] = json # guardo json para cada aba  
+                # trato json
+                json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+                json= json.replace("-", "0").replace("nd", "0")
+                data[aba] = json # guardo json para cada aba 
 
-        # obtem dados offline
-        else:            
-            json, status_code = obtemDataOffProducao(aba, ano)    
-            if status_code != 200:                
-                return {"error": "dados não encontrados"}
             else:
-                data[aba] = json # guardo json para cada aba  
+                data[aba]= {"error": f"A conexão com o site da Embrapa ocorreu com sucesso, porém não foram encontrados dados para o ano {ano}."}
+
+        # conexão nok
+        else:            
+            json, _ = obtemDataOffProducao(aba, ano)    
+            data[aba] = json # guardo json para cada aba         
             
     return data
 
@@ -103,21 +119,24 @@ def obtemJsonProcessamento(ano):
         url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        # obtem dados online
-        if status_code == 200:            
+        # conexão ok
+        if status_code == 200:
+            
+            # obtem dados online
+            if df.iloc[:,1].max() > 0:
 
-            # trato dados
-            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json = json.replace("-", "0").replace("nd", "0") 
-            data[aba] = json # guardo json para cada aba        
+                # trato json
+                json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+                json= json.replace("-", "0").replace("nd", "0")
+                data[aba] = json # guardo json para cada aba 
 
-        # obtem dados offline
-        else:            
-            json, status_code = obtemDataOffProcessamento(aba, ano)    
-            if status_code != 200:                
-                return {"error": "dados não encontrados"}
             else:
-                data[aba] = json # guardo json para cada aba  
+                data[aba]= {"error": f"A conexão com o site da Embrapa ocorreu com sucesso, porém não foram encontrados dados para o ano {ano}."}
+
+        # conexão nok        
+        else:            
+            json, _ = obtemDataOffProcessamento(aba, ano)    
+            data[aba] = json # guardo json para cada aba 
             
     return data
 
@@ -126,7 +145,7 @@ def obtemJsonProcessamento(ano):
 def obtemJsonComercializacao(ano):
 
     # obtenho url dos dados
-    urls = obtemUrls("Processamento", ano)
+    urls = obtemUrls("Comercializacao", ano)
 
     data = {}
 
@@ -135,21 +154,24 @@ def obtemJsonComercializacao(ano):
         url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        # obtem dados online
-        if status_code == 200:            
+        # conexão ok
+        if status_code == 200:
+            
+            # obtem dados online
+            if df.iloc[:,1].max() > 0:
 
-            # trato dados
-            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json = json.replace("-", "0").replace("nd", "0") 
-            data[aba] = json # guardo json para cada aba     
+                # trato json
+                json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+                json= json.replace("-", "0").replace("nd", "0")
+                data[aba] = json # guardo json para cada aba 
 
-        # obtem dados offline
-        else:            
-            json, status_code = obtemDataOffComercializacao(aba, ano)    
-            if status_code != 200:                
-                return {"error": "dados não encontrados"}
             else:
-                data[aba] = json # guardo json para cada aba  
+                data[aba]= {"error": f"A conexão com o site da Embrapa ocorreu com sucesso, porém não foram encontrados dados para o ano {ano}."}
+
+        # conexão nok
+        else:            
+            json, _ = obtemDataOffComercializacao(aba, ano)    
+            data[aba] = json # guardo json para cada aba 
             
     return data
 
@@ -167,21 +189,24 @@ def obtemJsonImportacao(ano):
         url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        # obtem dados online
-        if status_code == 200:            
+        # conexão ok
+        if status_code == 200:
+            
+            # obtem dados online
+            if df.iloc[:,1].max() > 0:
 
-            # trato dados
-            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json = json.replace("-", "0").replace("nd", "0") 
-            data[aba] = json # guardo json para cada aba     
+                # trato json
+                json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+                json= json.replace("-", "0").replace("nd", "0")
+                data[aba] = json # guardo json para cada aba 
 
-        # obtem dados offline
-        else:            
-            json, status_code = obtemDataOffImportacao(aba, ano)    
-            if status_code != 200:                
-                return {"error": "dados não encontrados"}
             else:
-                data[aba] = json # guardo json para cada aba  
+                data[aba]= {"error": f"A conexão com o site da Embrapa ocorreu com sucesso, porém não foram encontrados dados para o ano {ano}."}
+
+        # conexão nok
+        else:            
+            json, _ = obtemDataOffImportacao(aba, ano)    
+            data[aba] = json # guardo json para cada aba 
             
     return data
 
@@ -199,20 +224,23 @@ def obtemJsonExportacao(ano):
         url = urls[aba][0]   # obtenho a url        
         df, status_code= obtemDados(url) # obtenho dos dados da url
 
-        # obtem dados online
-        if status_code == 200:            
-
-            # trato dados
-            json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
-            json = json.replace("-", "0").replace("nd", "0") 
-            data[aba] = json # guardo json para cada aba     
-
-        # obtem dados offline
-        else:            
-            json, status_code = obtemDataOffExportacao(aba, ano)    
-            if status_code != 200:                
-                return {"error": "dados não encontrados"}
-            else:
-                data[aba] = json # guardo json para cada aba  
+        # conexão ok
+        if status_code == 200:
             
+            # obtem dados online
+            if df.iloc[:,1].max() > 0:
+
+                # trato json
+                json = df.to_json(orient='records', force_ascii=False, indent=4).replace("\n", "").replace("\"", "") 
+                json= json.replace("-", "0").replace("nd", "0")
+                data[aba] = json # guardo json para cada aba 
+
+            else:
+                data[aba]= {"error": f"A conexão com o site da Embrapa ocorreu com sucesso, porém não foram encontrados dados para o ano {ano}."}
+
+        # conexão nok
+        else:            
+            json, _ = obtemDataOffExportacao(aba, ano)    
+            data[aba] = json # guardo json para cada aba 
+             
     return data
