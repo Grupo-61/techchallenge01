@@ -1,5 +1,5 @@
 import pandas as pd
-from db import obtemDataOffImportacao
+from obtem_dados_offline import obtemDataOffImportacao
 
 aba= "uvas_passas"
 df= pd.read_csv("data_offline/importacao/" + aba + ".csv", sep="\t")
