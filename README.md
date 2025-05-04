@@ -126,10 +126,23 @@ Detalhar os passos para implantar no Vercel
 python -m pytest
 ```
 
+# Autenticação
+
+Autenticação básica com `httpauth`
+
+
+Instalação:
+
+``` bash
+$ pip install flask-httpauth
+```
+
 ## Swagger
 
 
 ## Insominia
+
+- configuração da autorização
 
 
 ## Autores

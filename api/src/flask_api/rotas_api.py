@@ -1,6 +1,19 @@
 from ..scraper.webscraping import obtemDados, obtemJsonProducao, obtemJsonProcessamento, obtemJsonComercializacao, obtemJsonImportacao, obtemJsonExportacao
 from flask import Blueprint
+from flask_httpauth import HTTPBasicAuth
 
+auth = HTTPBasicAuth()
+
+users = {
+    "user1": "password1",
+    "user2": "password2"
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and users[username] == password:
+        return username
+    return None
 
 # Definir o Blueprint
 rotas_bp = Blueprint('rotas', __name__)

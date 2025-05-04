@@ -30,7 +30,7 @@ def obtemDados(url):
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         logging.error(f"Erro ao acessar a URL {url}: {e}")
-        return pd.DataFrame(), response.status_code if response else 500
+        return pd.DataFrame(), 500
 
     # retorna erro conexao
     if response.status_code != 200:
