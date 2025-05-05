@@ -5,7 +5,7 @@ anos= []
 
 # aba produção
 def obtemDataOffProducao(aba, ano): 
-    df= pd.read_csv("data/data_offline/producao/" + aba + ".csv", sep=";")
+    df= pd.read_csv("api/data/data_offline/producao/" + aba + ".csv", sep=";")
     
     # obtem anos df
     for anos_df in df:
@@ -25,7 +25,7 @@ def obtemDataOffProducao(aba, ano):
 
 # aba processamento
 def obtemDataOffProcessamento(aba, ano):
-    df= pd.read_csv("data/data_offline/processamento/" + aba + ".csv", sep=";", encoding='unicode_escape')
+    df= pd.read_csv("api/data/data_offline/processamento/" + aba + ".csv", sep=";", encoding='unicode_escape')
 
     # obtem anos df
     for anos_df in df:

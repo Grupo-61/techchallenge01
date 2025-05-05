@@ -1,4 +1,4 @@
-from ..scraper.webscraping import obtemDados, obtemJsonProducao, obtemJsonProcessamento, obtemJsonComercializacao, obtemJsonImportacao, obtemJsonExportacao
+from api.src.scraper.webscraping import obtemDados, obtemJsonProducao, obtemJsonProcessamento, obtemJsonComercializacao, obtemJsonImportacao, obtemJsonExportacao
 from flask import Blueprint
 from flask_httpauth import HTTPBasicAuth
 
