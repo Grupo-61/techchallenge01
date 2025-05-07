@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_caching import Cache
 from .rotas_api import rotas_bp
+from ..autenticacao.rotas_autenticacao import autenticacao_bp 
 # Importe outros blueprints conforme necessário
 
 # Inicializar a aplicação Flask
@@ -20,6 +21,7 @@ def create_app():
 
     # Registrar blueprints
     app.register_blueprint(rotas_bp)
+    app.register_blueprint(autenticacao_bp, url_prefix="/auth")
 
     app.debug = True  # Ativar o modo de depuração para desenvolvimento
 

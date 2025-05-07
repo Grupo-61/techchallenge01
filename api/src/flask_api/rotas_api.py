@@ -1,5 +1,6 @@
 from ..scraper.webscraping import obtemDados, obtemJsonProducao, obtemJsonProcessamento, obtemJsonComercializacao, obtemJsonImportacao, obtemJsonExportacao
 from flask import Blueprint
+from ..autenticacao.decoradores import token_obrigatorio
 
 
 # Definir o Blueprint
@@ -8,6 +9,7 @@ rotas_bp = Blueprint('rotas', __name__)
 
 # producao ok
 @rotas_bp.route("/producao/ano=<int:ano>", methods=['GET'])
+@token_obrigatorio
 def producao(ano):
     return obtemJsonProducao(ano)
 
