@@ -110,6 +110,12 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
    ```bash
     http://localhost:3000/api
 
+# Depêndencias
+
+- Flask
+- Flasgger
+- Flask-JWT-Extended
+
 
 ## Configuração e implantação no Vercel
 
