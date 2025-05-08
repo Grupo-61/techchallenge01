@@ -97,10 +97,15 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
 
 
 ### 🌐 Como testar localmente com o Vercel:
+- Instalar Node.js `https://nodejs.org/pt`
 
 1. Instale o Vercel CLI:
    ```bash
    npm install -g vercel
+
+2. Login no Vercel
+```base
+
 
 2. Execute o projeto localmente:
    ```bash
