@@ -2,8 +2,8 @@ import requests, json
 from bs4 import BeautifulSoup
 import pandas as pd
 import logging
-from .obtem_dados_offline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
-from .urls import obtemUrls
+from api.src.scraper.obtem_dados_offline import obtemDataOffProducao, obtemDataOffProcessamento, obtemDataOffComercializacao, obtemDataOffImportacao, obtemDataOffExportacao
+from api.src.scraper.urls import obtemUrls
 
 # Configuração do logger
 logger = logging.getLogger(__name__)

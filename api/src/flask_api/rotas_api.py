@@ -1,19 +1,7 @@
 from api.src.scraper.webscraping import obtemDados, obtemJsonProducao, obtemJsonProcessamento, obtemJsonComercializacao, obtemJsonImportacao, obtemJsonExportacao
 from flask import Blueprint
-from flask_httpauth import HTTPBasicAuth
+from api.src.autenticacao.decoradores import token_obrigatorio
 
-auth = HTTPBasicAuth()
-
-users = {
-    "user1": "password1",
-    "user2": "password2"
-}
-
-@auth.verify_password
-def verify_password(username, password):
-    if username in users and users[username] == password:
-        return username
-    return None
 
 # Definir o Blueprint
 rotas_bp = Blueprint('rotas', __name__)
@@ -21,6 +9,7 @@ rotas_bp = Blueprint('rotas', __name__)
 
 # producao ok
 @rotas_bp.route("/producao/ano=<int:ano>", methods=['GET'])
+@token_obrigatorio
 def producao(ano):
     return obtemJsonProducao(ano)
 
