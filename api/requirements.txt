@@ -8,7 +8,7 @@ charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
 dotenv==0.9.9
-Flask==2.3.2
+flask==3.1.0
 Flask-Caching==2.3.1
 Flask-HTTPAuth==4.8.0
 Flask-JWT-Extended==4.7.1
@@ -39,4 +39,3 @@ soupsieve==2.6
 typing_extensions==4.13.0
 tzdata==2025.2
 urllib3==2.3.0
-Werkzeug==2.3.0

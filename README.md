@@ -104,7 +104,8 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
    npm install -g vercel
 
 2. Login no Vercel
-```base
+```bash
+vercel login
 
 
 2. Execute o projeto localmente:
