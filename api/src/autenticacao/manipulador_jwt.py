@@ -8,6 +8,7 @@ load_dotenv()
 CHAVE_SECRETA = os.getenv("JWT_SECRET_KEY")
 
 def criar_token(usuario):
+    print("Usuario:", usuario, CHAVE_SECRETA)
     payload = {
         "usuario": usuario,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)

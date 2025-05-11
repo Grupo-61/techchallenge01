@@ -13,6 +13,8 @@ USUARIO_FIXO = {
 def login():
     dados = request.get_json()
 
+    print(f"Dados recebidos: {dados}")
+
     if not dados or "usuario" not in dados or "senha" not in dados:
         return jsonify({"mensagem": "Usuário e senha são obrigatórios"}), 400
 
