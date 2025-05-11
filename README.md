@@ -64,19 +64,19 @@ $ git clone https://github.com/Grupo-61/techchalenge01.git
 Criando um ambiente virtual
 
 ``` bash
-$ python -m venv env
+$ python -m venv venv
 ```
 
 Ativando o ambiente virtual
 
 ``` bash
-$ source env/Scripts/activate 
+$ source venv/Scripts/activate 
 ```
 
 Instalação das depêndências
 
 ``` bash
-$ pip install -r requirementes.txt
+$ pip install -r requirements.txt
 ```
 
 Executando o servidor Flask a partir do diretório raiz do projeto
