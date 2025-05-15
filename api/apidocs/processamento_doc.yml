@@ -1,0 +1,36 @@
+Retorna dados do Processamento de Uvas do ano especificado
+---
+parameters:
+  - name: ano
+    in: path
+    type: integer
+    required: true
+    description: Ano do processamento a ser consultado
+    produces:
+    - application/json
+
+responses:
+  200:
+    description: Dados do processamento retornados com sucesso
+    schema:
+      type: object
+      properties:
+        categoria:
+          type: array
+          items:
+            $ref: "#/definitions/ProdutoProcessamento"
+
+  404:
+    description: Processamento não encontrado para o ano especificado
+
+definitions:
+  ProdutoProcessamento:
+    type: object
+    properties:
+      Cultivar:
+        type: string
+        example: Bacarina
+      "Quantidade (Kg)":
+        type: number
+        format: float
+        example: 82899.0

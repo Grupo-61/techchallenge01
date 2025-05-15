@@ -1,0 +1,36 @@
+Retorna dados da Produção de Uvas do ano especificado
+---
+parameters:
+  - name: ano
+    in: path
+    type: integer
+    required: true
+    description: Ano da produção a ser consultado
+    produces:
+    - application/json
+
+responses:
+  200:
+    description: Dados da produção retornados com sucesso
+    schema:
+      type: object
+      properties:
+        producao:
+          type: array
+          items:
+            $ref: "#/definitions/ProdutoProducao"
+
+  404:
+    description: Produção não encontrada para o ano especificado
+
+definitions:
+  ProdutoProducao:
+    type: object
+    properties:
+      Produto:
+        type: string
+        example: VINHO DE MESA
+      "Quantidade (L.)":
+        type: number
+        format: float
+        example: 217208604.0
