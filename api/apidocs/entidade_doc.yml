@@ -1,0 +1,17 @@
+Retorna todos os registros disponíveis para a entidade informada.
+Entidades possiveis - producao, processamento, comercializacao, importacao e exportacao.
+---
+parameters:
+  - name: entidade
+    in: path
+    required: true
+    type: string
+    description: Nome da entidade - entidades possiveis são producao, processamento, comercializacao, importacao e exportacao
+  
+responses:
+  200:
+    description: "Lista de registros retornada com sucesso - schema de retorno varia conforme entidade.
+    Verificar rotas equivalentes"
+    schema:
+  404:
+    description: "Entidade não encontrada"

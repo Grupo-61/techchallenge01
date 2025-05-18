@@ -1,0 +1,40 @@
+Retorna dados da Importação de Uvas do ano especificado
+---
+parameters:
+  - name: ano
+    in: path
+    type: integer
+    required: true
+    description: Ano da importação a ser consultado
+    produces:
+    - application/json
+
+responses:
+  200:
+    description: Dados da importação retornados com sucesso
+    schema:
+      type: object
+      properties:
+        categoria:
+          type: array
+          items:
+            $ref: "#/definitions/ProdutoImportacao"
+
+  404:
+    description: Importação não encontrada para o ano especificado
+
+definitions:
+  ProdutoImportacao:
+    type: object
+    properties:
+      Paises:
+        type: string
+        example: Africa do Sul
+      "Quantidade (Kg)":
+        type: number
+        format: float
+        example: 4980.0
+      "Valor (US$):":
+        type: number
+        format: float
+        example: 3.836

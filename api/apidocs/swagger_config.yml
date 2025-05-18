@@ -1,0 +1,13 @@
+swagger: "2.0"
+info:
+  title: "API Pública - Acesso aos dados da Embrapa Viticultura"
+  description: |
+    API Pública para acesso aos da Embrapa Viticultura, da URL http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01
+    Abas com dados disponíveis: Produção, Processamento, Comercialização, Importação e Exportação.
+    As rotas disponíveis permitem acessar aos dados de cada aba acima.
+    Importante: em caso de instabilidade, a API mantem os dados armazenados para garantia de disponibilidade.
+  version: "1.0.0"
+host: "localhost:5000"
+basePath: "/"
+schemes:
+  - http

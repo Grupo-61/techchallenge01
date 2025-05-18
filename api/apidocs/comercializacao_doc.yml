@@ -1,0 +1,36 @@
+Retorna dados da Comercialização de Uvas do ano especificado
+---
+parameters:
+  - name: ano
+    in: path
+    type: integer
+    required: true
+    description: Ano da comercialização a ser consultado
+    produces:
+    - application/json
+
+responses:
+  200:
+    description: Dados da comercialização retornados com sucesso
+    schema:
+      type: object
+      properties:
+        comercializacao:
+          type: array
+          items:
+            $ref: "#/definitions/ProdutoComercializacao"
+
+  404:
+    description: Comercialização não encontrada para o ano especificado
+
+definitions:
+  ProdutoComercializacao:
+    type: object
+    properties:
+      Produto:
+        type: string
+        example: VINHO DE MESA
+      "Quantidade (L.)":
+        type: number
+        format: float
+        example: 98327606.0
