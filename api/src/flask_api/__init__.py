@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_caching import Cache
-from .rotas_api import rotas_bp
-from ..autenticacao.rotas_autenticacao import autenticacao_bp 
+from api.src.flask_api.rotas_api import rotas_bp
+from api.src.autenticacao.rotas_autenticacao import autenticacao_bp 
 # Importe outros blueprints conforme necessário
 
 # Inicializar a aplicação Flask

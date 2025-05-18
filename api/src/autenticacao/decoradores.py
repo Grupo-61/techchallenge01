@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import request, jsonify
-from .manipulador_jwt import verificar_token
+from api.src.autenticacao.manipulador_jwt import verificar_token
 
 def token_obrigatorio(f):
     @wraps(f)

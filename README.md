@@ -114,19 +114,19 @@ $ git clone https://github.com/Grupo-61/techchalenge01.git
 Criando um ambiente virtual
 
 ``` bash
-$ python -m venv env
+$ python -m venv venv
 ```
 
 Ativando o ambiente virtual
 
 ``` bash
-$ source env/Scripts/activate 
+$ source venv/Scripts/activate 
 ```
 
 Instalação das depêndências
 
 ``` bash
-$ pip install -r requirementes.txt
+$ pip install -r requirements.txt
 ```
 
 Executando o servidor Flask a partir do diretório raiz do projeto
@@ -147,10 +147,16 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
 
 
 ### 📋 Como testar localmente com o Vercel:
+- Instalar Node.js `https://nodejs.org/pt`
 
 1. Instale o Vercel CLI:
    ```bash
    npm install -g vercel
+
+2. Login no Vercel
+```bash
+vercel login
+
 
 2. Execute o projeto localmente:
    ```bash
@@ -159,6 +165,12 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
 3. Acesse:
    ```bash
     http://localhost:3000/api
+
+# Depêndencias
+
+- Flask
+- Flasgger
+- Flask-JWT-Extended
 
 
 ## ⚙️ Configuração e implantação 
@@ -174,6 +186,17 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
 python -m pytest
 ```
 
+# Autenticação
+
+Autenticação básica com `httpauth`
+
+
+Instalação:
+
+``` bash
+$ pip install flask-httpauth
+```
+
 ## 📜 Swagger
     utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível.
 
@@ -181,11 +204,15 @@ python -m pytest
     O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
 
 ## ✒️ Autores
-      Bruno Gabriel
-      Walmir Duque
-      Agusto Omena
-      Pedro Ulisses
-      Ana Paula de Almeida
+    
+## Autores
+
+- [Agusto Omena](https://github.com/AugustoOmena)
+- [Ana Paula de Almeida](https://github.com/Ana9873P)
+- [Bruno Gabriel](https://github.com/brunogabrieldeoliveira)
+- [Pedro Ulisses](https://github.com/ordepzero)
+- [Walmir Duque](https://github.com/WALMIRDUQUE)
+      
 
 
 ## 📄 Licença
