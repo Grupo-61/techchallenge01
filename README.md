@@ -87,7 +87,10 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
     |   - collection_insomnia/Insomnia_2025-04-03.yaml
     └── docs/
         └── arquitetura/
+            |-Projeto61.pdf
+            |-Projeto61.drawio 
         └── imagens/
+            |- logo61.png 
 
     |- gitignore
     |- estrutura.txt
@@ -160,7 +163,7 @@ Link: http://127.0.0.1:5000/comercializacao/ano=2016
 
 ## ⚙️ Configuração e implantação 
  ### Vercel
-     - Detalhar os passos para implantar no Vercel
+     - O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
 
  ### Testes Unitário
     - Com as bibliotecas `pytest` e `unittest` instaladas
@@ -172,13 +175,19 @@ python -m pytest
 ```
 
 ## 📜 Swagger
-
+    utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível.
 
 ## 🌐 Insominia
-
+    O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
 
 ## ✒️ Autores
-      
+      Bruno Gabriel
+      Walmir Duque
+      Agusto Omena
+      Pedro Ulisses
+      Ana Paula de Almeida
 
 
 ## 📄 Licença
+Este projeto está licenciado sob a Licença MIT.  
+Consulte o arquivo [license](docs/license/license.txt)  para mais detalhes.
