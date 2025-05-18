@@ -85,7 +85,7 @@ def obtemJsonPaginas(url, rota, ano):
                 if not validar_dados(list_data[-1]):
                     data[aba] = list_data # guardo json para cada aba                     
                     json_data = json.dumps({f"{rota}": {f"{ano}": {f"{aba}": list_data}}}, ensure_ascii=False)
-                    salvar_arquivo_json(json_data, rota, ano, aba)
+                    # salvar_arquivo_json(json_data, rota, ano, aba)
                 else:
                     mensagem = f"Dados zerados para o ano {ano} na aba {aba}."
                     log.info(mensagem)

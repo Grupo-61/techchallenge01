@@ -1,6 +1,7 @@
 from api.src.scraper.webscraping import obtemJsonPaginas
 from flask import Blueprint
 from api.src.autenticacao.decoradores import token_obrigatorio
+import json
 
 
 # Definir o Blueprint
@@ -38,15 +39,40 @@ def exportacao(ano):
 def dados(entidade):
     # Use lógica para escolher a função correta com base na entidade
     funcoes = {
-        "producao": obtemJsonPaginas,
-        "processamento": obtemJsonPaginas,
-        "comercializacao": obtemJsonPaginas,
-        "importacao": obtemJsonPaginas,
-        "exportacao": obtemJsonPaginas,
+        "producao": {
+            "url": "Producao",
+            "rota": "producao",
+            "funcao": obtemJsonPaginas
+        },
+        "processamento": {
+            "url": "Processamento",
+            "rota": "processamento",
+            "funcao": obtemJsonPaginas
+        },
+        "comercializacao": {
+            "url": "Comercializacao",
+            "rota": "comercializacao",
+            "funcao": obtemJsonPaginas
+        },
+        "importacao": {
+            "url": "Importacao",
+            "rota": "importacao",
+            "funcao": obtemJsonPaginas
+        },
+        "exportacao": {
+            "url": "Exportacao",
+            "rota": "exportacao",
+            "funcao": obtemJsonPaginas
+        },
     }
     funcao = funcoes.get(entidade, lambda x: {"erro": "Entidade inválida"})
-    todos = {}
-    for i in range(1970, 2024):
-        todos[f"ano_{i}"] = funcao(i)
+    todos = []
 
-    return todos
+    funcao_url = funcao.get("url", None)
+    funcao_rota = funcao.get("rota", None)
+    funcao_funcao = funcao.get("funcao", None)
+
+    for i in range(1970, 2024):
+        todos.extend([json.loads(funcao_funcao(funcao_url, funcao_rota, i))])
+
+    return json.dumps(todos, ensure_ascii=False)
