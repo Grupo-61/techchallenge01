@@ -204,11 +204,15 @@ $ pip install flask-httpauth
     O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
 
 ## ✒️ Autores
-      Bruno Gabriel
-      Walmir Duque
-      Agusto Omena
-      Pedro Ulisses
-      Ana Paula de Almeida
+    
+## Autores
+
+- [Agusto Omena](https://github.com/AugustoOmena)
+- [Ana Paula de Almeida](https://github.com/Ana9873P)
+- [Bruno Gabriel](https://github.com/brunogabrieldeoliveira)
+- [Pedro Ulisses](https://github.com/ordepzero)
+- [Walmir Duque](https://github.com/WALMIRDUQUE)
+      
 
 
 ## 📄 Licença
