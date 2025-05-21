@@ -1,12 +1,18 @@
 from flask import Blueprint, request, jsonify
 from api.src.autenticacao.manipulador_jwt import criar_token
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+CHAVE_SECRETA = os.getenv("JWT_SECRET_KEY")
 
 autenticacao_bp = Blueprint('autenticacao', __name__)
 
 # Pode ser movido para .env
 USUARIO_FIXO = {
-    "usuario": "admin",
-    "senha": "123456"
+    "usuario": os.environ.get("USUARIO_FIXO_USERNAME"),
+    "senha": os.environ.get("USUARIO_FIXO_SENHA")
 }
 
 @autenticacao_bp.route("/login", methods=["POST"])
