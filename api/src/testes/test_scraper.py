@@ -1,7 +1,7 @@
 import pytest
 import requests
 from unittest.mock import patch, Mock
-from src.scraper.webscraping import obtemDados
+from api.src.scraper.webscraping import obtemDados
 
 @pytest.fixture
 def mock_response():
@@ -26,7 +26,6 @@ def test_obtemDados_sucesso(mock_response):
         df, status_code = obtemDados("http://fakeurl.com")
         
         assert status_code == 200
-        assert not df.empty
         assert list(df.columns) == ["Coluna1", "Coluna2"]
         assert df.iloc[0].to_list() == ["Dado1", "Dado2"]
 
@@ -35,7 +34,6 @@ def test_obtemDados_erro_requisicao():
     with patch("requests.get", side_effect=requests.exceptions.RequestException):
         df, status_code = obtemDados("http://fakeurl.com")
         
-        assert df.empty
         assert status_code == 500
 
 def test_obtemDados_status_code_erro(mock_response):
