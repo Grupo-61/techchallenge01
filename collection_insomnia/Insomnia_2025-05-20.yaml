@@ -5,12 +5,12 @@ meta:
   created: 1745273851980
   modified: 1745273851980
 collection:
-  - url: http://127.0.0.1:5000/producao/ano=1970
+  - url: "{{ _.url }}/producao/ano=1979"
     name: Obtem Produção
     meta:
       id: req_bf81d55990fc44e982bc6641b167e583
       created: 1743685614551
-      modified: 1746997813675
+      modified: 1747790695187
       isPrivate: false
       sortKey: -1743685614551
     method: GET
@@ -19,7 +19,7 @@ collection:
         value: insomnia/11.0.2
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiYWRtaW4iLCJleHAiOjE3NDcwMDEyODN9.bU_EtVLXsy_pdwZGjfIZ7X6Qnx4F30ABOQ8fA0fYhNw
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiYWRtaW4iLCJleHAiOjE3NDcxODAwMjR9.fRPr_-KYYt-ESjFW2kUcfA8P2lM9w2qteH_TpXck16c
     settings:
       renderRequestBody: true
       encodeUrl: true
@@ -28,12 +28,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://127.0.0.1:5000/processamento
+  - url: "{{ _.url }}/processamento/ano=2000"
     name: Obtem Processamento
     meta:
       id: req_2cec6579c476484a9d85100d2e28bd7a
       created: 1743685672221
-      modified: 1743685680758
+      modified: 1747793150541
       isPrivate: false
       sortKey: -1743685614501
     method: GET
@@ -48,12 +48,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://127.0.0.1:5000/comercializacao/ano=asdad
+  - url: "{{ _.url }}/comercializacao/ano=2012"
     name: Obtem Comercializacao
     meta:
       id: req_364c3d915a39454099ec13dfdf11307d
       created: 1743685703873
-      modified: 1745275107389
+      modified: 1747790764527
       isPrivate: false
       sortKey: -1743685614451
     method: GET
@@ -68,12 +68,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://127.0.0.1:5000/importacao
+  - url: "{{ _.url }}/importacao/ano=2021"
     name: Obtem Importacao
     meta:
       id: req_cdef0f4013714e69b2d3321c8cc71547
       created: 1743685726140
-      modified: 1743685730460
+      modified: 1747790717440
       isPrivate: false
       sortKey: -1743685614401
     method: GET
@@ -88,12 +88,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://127.0.0.1:5000/exportacao
+  - url: "{{ _.url }}/exportacao/ano=2020"
     name: Obtem Exportação
     meta:
       id: req_dbb381332e1743a3850c50602fda95ca
       created: 1743685748514
-      modified: 1743685750608
+      modified: 1747790729353
       isPrivate: false
       sortKey: -1743685614351
     method: GET
@@ -108,12 +108,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://127.0.0.1:5000/auth/login
+  - url: "{{ _.url }}/auth/login"
     name: Login
     meta:
       id: req_8757996b86f4401e8b3d370af37c590d
       created: 1746996948850
-      modified: 1746997338658
+      modified: 1747790707174
       isPrivate: false
       sortKey: -1746996948850
     method: POST
@@ -142,6 +142,26 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: "{{ _.url }}/apidocs"
+    name: API Docs
+    meta:
+      id: req_28c79a6d32214c25a5d00c903bd3bc99
+      created: 1747793556219
+      modified: 1747793608092
+      isPrivate: false
+      sortKey: -1747793556219
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
@@ -156,17 +176,21 @@ environments:
     modified: 1743685552477
     isPrivate: false
   subEnvironments:
-    - name: New Environment
+    - name: Produção Vercel
       meta:
         id: env_d8684b5bcd3749ea82dcd0401c54f754
         created: 1745274261457
-        modified: 1745274261457
+        modified: 1747793948171
         isPrivate: false
         sortKey: 1745274261457
-    - name: New Environment
+      data:
+        url: https://techchallenge01-ulissesphs-projects.vercel.app
+    - name: Local Flask
       meta:
         id: env_9943b24901d84796ad72c7956dbcf9aa
         created: 1745274270166
-        modified: 1745274270166
+        modified: 1747792651920
         isPrivate: false
         sortKey: 1745274270166
+      data:
+        url: http://127.0.0.1:5000

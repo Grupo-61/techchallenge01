@@ -1,5 +1,4 @@
 import pytest
-import pandas as pd
 import requests
 from unittest.mock import patch, Mock
 from src.scraper.webscraping import obtemDados

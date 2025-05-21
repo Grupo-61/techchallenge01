@@ -1,7 +1,7 @@
 # Tech Challenge - Fase 1 - API Vitivinicultura Embrapa 1970-2024
 
 # ![logo61](docs/imagens/logo61.png) 
-  # Sobre o Projeto 61
+  # Sobre o Projeto
 
 **Tech Challenge** é um projeto que reúne os conhecimentos adquiridos em todas as disciplinas da fase. Nesta etapa, o desafio proposto foi o seguinte:
 
@@ -17,7 +17,7 @@ A proposta do projeto é criar uma **API pública** para consulta nos dados disp
 
 **Link do site:** [Embrapa Vitivinicultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01)
 
-API desenvolvida será utilizada para alimentar uma base de dados que, futuramente, servirá para um modelo de **Machine Learning**.
+A API desenvolvida será utilizada para alimentar uma base de dados que servirá para um modelo de **Machine Learning**.
 
 ## 📌 Objetivos
 
@@ -38,28 +38,13 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
 .
 └── TECHCHALENGE01/
     ├── api/
-    └── data/
-       └── data_offline/
+    └── dados/
+       └── dados_offline/
           └── comercializacao/
-              |- producao.csv
           └── exportacao/
-              |- espumantes.csv
-              |- suco_uva.csv
-              |- uvas_frescas.csv
-              |- vinhos_mesa.csv
           └── importacao/
-              |- espumantes.csv
-              |- suco_uva.csv
-              |- uvas_frescas.csv
-              |- vinhos_mesa.csv
           └── processamento/
-              |- americanas_hibridas.csv
-              |- sem_classificacao.csv
-              |- uvas_mesa.csv
-              |- viniferas.csv
           └── producao/
-              |- producao.csv
-
         ├── src/
         └── autenticacao/
             |- __init__.py
@@ -72,7 +57,6 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
         └── scraper/
             |- __init__.py
             |- obtem_dados_offline.py
-            |- trata_dados.py
             |- urls.py
             |- webscraping.py
         └── scraper/
@@ -84,7 +68,7 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
     |- requirements.txt
 
     ├── collection_insomnia/
-    |   - collection_insomnia/Insomnia_2025-04-03.yaml
+    |   - Insomnia_2025-04-03.yaml
     └── docs/
         └── arquitetura/
             |-Projeto61.pdf
@@ -108,7 +92,7 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
 Clonando o projeto localmente
 
 ``` bash
-$ git clone https://github.com/Grupo-61/techchalenge01.git
+$ git clone https://github.com/Grupo-61/techchallenge01.git
 ```
 
 Criando um ambiente virtual
@@ -126,52 +110,57 @@ $ source venv/Scripts/activate
 Instalação das depêndências
 
 ``` bash
-$ pip install -r requirements.txt
+$ pip install -r api/requirements.txt
 ```
 
-Executando o servidor Flask a partir do diretório raiz do projeto
+Executando o servidor Flask a partir do diretório raiz do projeto:
 
 ``` bash
-$ flask run
+$ cd api
+$ flask run 
 ```
 
-Ou executar com o debug ativado
+Ou executar com o debug ativado:
 
 ``` bash
+$ cd api
 $ flask run --debug
 ```
 
 Testando as consultas localmente via navegador
 
-Link: http://127.0.0.1:5000/comercializacao/ano=2016
+Link: `http://127.0.0.1:5000/comercializacao/ano=2016`
 
 
 ### 📋 Como testar localmente com o Vercel:
 - Instalar Node.js `https://nodejs.org/pt`
 
 1. Instale o Vercel CLI:
-   ```bash
-   npm install -g vercel
+```bash
+$ npm install -g vercel
+```
 
 2. Login no Vercel
 ```bash
-vercel login
-
+$ vercel login
+```
 
 2. Execute o projeto localmente:
-   ```bash
-    vercel dev
+```bash
+$ vercel dev
+```
 
-3. Acesse:
-   ```bash
-    http://localhost:3000/api
+3. Acesse via navegador:
 
-# Depêndencias
+`http://localhost:3000/`
+
+### Depêndencias
 
 - Flask
 - Flasgger
 - Flask-JWT-Extended
-
+- Beautifulsoup4
+- Pytest
 
 ## ⚙️ Configuração e implantação 
  ### Vercel
@@ -183,29 +172,33 @@ vercel login
     - Incluir cenários de testes
 
 ```bash
-python -m pytest
+$ cd api
+$ python -m pytest
 ```
 
-# Autenticação
+## Autenticação
 
-Autenticação básica com `httpauth`
-
-
-Instalação:
-
-``` bash
-$ pip install flask-httpauth
-```
 
 ## 📜 Swagger
-    utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível.
+
+
 
 ## 🌐 Insominia
-    O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
+
+Dentro do diretório `collection_insomnia` está disponível o arquivo `Insomnia_2025-05-20.yaml` que é uma `collection do insomnia` contendo as configurações das chamadas à API local e pública, respectivamente na configuração de ambientes `Local Flask` e `Produção Vercel`. 
+
+Para utilizar a collection é necessário importar o arquivo para o Insomnia. Após configurado é possível acessar os seguintes `endpoints`:
+
+- Login: `/auth/login`
+- Produção: `/producao/ano=<ano>`
+- Processamento: `/processamento/ano=<ano>`
+- Comercialização: `/comercializacao/ano=<ano>`
+- Importação: `/importacao/ano=<ano>`
+- Exportação: `/exportacao/ano=<ano>`
+- Swagger Docs: `/apidocs`
+
 
 ## ✒️ Autores
-    
-## Autores
 
 - [Agusto Omena](https://github.com/AugustoOmena)
 - [Ana Paula de Almeida](https://github.com/Ana9873P)
@@ -213,7 +206,6 @@ $ pip install flask-httpauth
 - [Pedro Ulisses](https://github.com/ordepzero)
 - [Walmir Duque](https://github.com/WALMIRDUQUE)
       
-
 
 ## 📄 Licença
 Este projeto está licenciado sob a Licença MIT.  
