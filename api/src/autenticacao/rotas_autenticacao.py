@@ -9,7 +9,6 @@ CHAVE_SECRETA = os.getenv("JWT_SECRET_KEY")
 
 autenticacao_bp = Blueprint('autenticacao', __name__)
 
-# Pode ser movido para .env
 USUARIO_FIXO = {
     "usuario": os.environ.get("USUARIO_FIXO_USERNAME"),
     "senha": os.environ.get("USUARIO_FIXO_SENHA")
