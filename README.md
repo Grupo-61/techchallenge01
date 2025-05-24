@@ -1,12 +1,17 @@
-# Tech Challenge - Fase 1 - API Vitivinicultura Embrapa 1970-2024
+# Tech Challenge 1 (Fase 1): API Viticultura Embrapa 1970-2024
 
 # ![logo61](docs/imagens/logo61.png) 
-  # Sobre o Projeto 61
+  # Sobre o Projeto
 
-**Tech Challenge** é um projeto que reúne os conhecimentos adquiridos em todas as disciplinas da fase. Nesta etapa, o desafio proposto foi o seguinte:
+**Tech Challenge** é um projeto que reúne a aplicação dos conhecimentos adquiridos em todas as disciplinas de uma fase da Especialização em Machine Learning Engineering da FIAP PosTech.
 
-> 📢 **Problema:** Você foi contratado(a) para uma consultoria e seu trabalho envolve analisar os dados de vitivinicultura da Embrapa, os quais estão disponíveis no site [Embrapa Viticultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01).
+Para o Tech Challenge 1, o desafio proposto foi o seguinte:
 
+> 📢 **Problema:** Você foi contratado(a) para uma consultoria e seu trabalho envolve analisar os dados de vitivinicultura da **Embrapa Uva e Vinho** que é um centro de pesquisa da Embrapa (Empresa Brasileira de Pesquisa Agropecuária). Este centro mantém um site que disponibiliza dados sobre a Viticultura no Brasil, como produção de uvas, vinhos e sucos, além de estatísticas do setor desde 1970.
+
+**Link do site:** [Embrapa Vitivinicultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01)
+
+**Proposta do desafio:**
 A proposta do projeto é criar uma **API pública** para consulta nos dados disponíveis no site da Embrapa nas respectivas abas:
 
 - Produção
@@ -14,8 +19,6 @@ A proposta do projeto é criar uma **API pública** para consulta nos dados disp
 - Comercialização
 - Importação
 - Exportação
-
-**Link do site:** [Embrapa Vitivinicultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01)
 
 API desenvolvida será utilizada para alimentar uma base de dados que, futuramente, servirá para um modelo de **Machine Learning**.
 
@@ -31,12 +34,27 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
   - Realizar o deploy com um link acessível e compartilhável.
   - Disponibilizar o código em um repositório no **GitHub**.
 
+## Possíveis dores
+
+- Falta de padronização para acesso aos dados bem como tipos de retornos e formatos mais adequados para consumo na produção de relatórios e analytics.
+- Suporte e documentação insuficientes.
+- Indisponibilidade de dados por instabilidade do site da Embrapa.
+- Ausência de método de autenticação para acesso ados dados.
+
+## Proposta de solução
+
+Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
+
+- Coleta automática e atualizada de dados do site Vitibrasil da Embrapa Uva e Vinho.
+- Armazenamento dos dados extraídos do site Vitibrasil para garantia de disponibilidade (fallback).
+- Fornecimento de endpoints para consulta de dados de diversas fontes tais como Produção, Processamento, Comercialização, Importação e Exportação, podendo filtrar por ano.
+- Cenários futuros: são propostos modelos de Machine Learning (ML) para implementação futura, para as diversas fontes de dados.
 
 ## 📂 Estrutura do projeto
 
 ```
 .
-└── TECHCHALENGE01/
+└── TECHCHALLENGE01/
     ├── api/
     └── data/
        └── data_offline/
@@ -103,6 +121,10 @@ API desenvolvida será utilizada para alimentar uma base de dados que, futuramen
 
 ## 🔩 Arquitetura da solução
 
+A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. 
+[Arquitetura](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
+
+
 ## 🛠️ Instalação do projeto local
 
 Clonando o projeto localmente
@@ -168,16 +190,20 @@ vercel login
 
 # Depêndencias
 
-- Flask
-- Flasgger
-- Flask-JWT-Extended
+Para o desenvolvimento deste desafio, foram utilizadas a seguintes bibliotecas e frameworks:
+- Backend: Flask
+- Documentação da API: Flassger - Swagger para Flask
+- Autenticação: Flask-JWT-Extended
+- Modularização: além de separação em componentes, também foi usado Blueprint
+- Registro de Log: Logger
+- Webscraping: BeatifulSoap
 
 
 ## ⚙️ Configuração e implantação 
  ### Vercel
      - O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
 
- ### Testes Unitário
+ ### Testes Unitários
     - Com as bibliotecas `pytest` e `unittest` instaladas
     - Executar o seguinte comando no terminal na raiz do projeto
     - Incluir cenários de testes
@@ -198,23 +224,25 @@ $ pip install flask-httpauth
 ```
 
 ## 📜 Swagger
-    utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível.
+    Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
+    [Documentação:](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
+
 
 ## 🌐 Insominia
     O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
 
 ## ✒️ Autores
-    
+
 ## Autores
 
-- [Agusto Omena](https://github.com/AugustoOmena)
 - [Ana Paula de Almeida](https://github.com/Ana9873P)
-- [Bruno Gabriel](https://github.com/brunogabrieldeoliveira)
-- [Pedro Ulisses](https://github.com/ordepzero)
-- [Walmir Duque](https://github.com/WALMIRDUQUE)
-      
+- [Augusto Omena](https://github.com/AugustoOmena)
+- [Bruno Gabriel de Oliveira](https://github.com/brunogabrieldeoliveira)
+- [José Walmir Gonçalves Duque](https://github.com/WALMIRDUQUE)
+- [Pedro Henrique da Costa Ulisses](https://github.com/ordepzero)
 
 
 ## 📄 Licença
+
 Este projeto está licenciado sob a Licença MIT.  
 Consulte o arquivo [license](docs/license/license.txt)  para mais detalhes.
