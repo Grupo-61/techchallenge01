@@ -121,8 +121,7 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 
 ## 🔩 Arquitetura da solução
 
-A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. 
-[Arquitetura](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
+A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
 
 
 ## 🛠️ Instalação do projeto local
@@ -225,7 +224,7 @@ $ pip install flask-httpauth
 
 ## 📜 Swagger
     Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
-    [Documentação:](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
+    [Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
 
 
 ## 🌐 Insominia
