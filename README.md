@@ -155,6 +155,8 @@ Para utilizar a collection é necessário importar o arquivo para o Insomnia. Ap
 - Exportação: `/exportacao/ano=<ano>`
 - Swagger Docs: `/apidocs`
 
+Como todas as rotas precisam que o usuário esteja autenticas, a primeira rota a ser consultada é a `Login`, após obter o token é necessário incluir ele na configuração do `Auth` de cada rota que consulta os dados, em seguida é possível realizar a consulta.
+
 
 ### 📋 Como testar localmente com o Vercel:
 - Instalar Node.js `https://nodejs.org/pt`
@@ -176,12 +178,19 @@ $ vercel dev
 
 3. Acesse via navegador:
 
-`http://localhost:3000/`
+Link: `http://localhost:3000/apidocs`
 
+- Na collection do `Insomnia` também tem a configuração para os endpoints apontando para o `Vercel`.
 
 
 ### ⚙️ Configuração e implantação do Vercel
-- O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
+- O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel.
+
+É necessário executar o seguinte comando a partir da raiz do projeto para realizar a implantação no Vercel:
+
+```bash
+$ vercel --prod
+```
 
 ## Testes Unitários
 - Com as bibliotecas `pytest` e `unittest` instaladas
