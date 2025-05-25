@@ -20,7 +20,9 @@ A proposta do projeto é criar uma **API pública** para consulta nos dados disp
 - Importação
 - Exportação
 
-API desenvolvida será utilizada para alimentar uma base de dados que, futuramente, servirá para um modelo de **Machine Learning**.
+**Link do site:** [Embrapa Vitivinicultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01)
+
+A API desenvolvida será utilizada para alimentar uma base de dados que servirá para um modelo de **Machine Learning**.
 
 ## 📌 Objetivos
 
@@ -56,64 +58,24 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 .
 └── TECHCHALLENGE01/
     ├── api/
-    └── data/
-       └── data_offline/
-          └── comercializacao/
-              |- producao.csv
-          └── exportacao/
-              |- espumantes.csv
-              |- suco_uva.csv
-              |- uvas_frescas.csv
-              |- vinhos_mesa.csv
-          └── importacao/
-              |- espumantes.csv
-              |- suco_uva.csv
-              |- uvas_frescas.csv
-              |- vinhos_mesa.csv
-          └── processamento/
-              |- americanas_hibridas.csv
-              |- sem_classificacao.csv
-              |- uvas_mesa.csv
-              |- viniferas.csv
-          └── producao/
-              |- producao.csv
-
+    └── dados/
+       └── dados_offline/
+            └── comercializacao/
+            └── exportacao/
+            └── importacao/
+            └── processamento/
+            └── producao/
         ├── src/
-        └── autenticacao/
-            |- __init__.py
-            |- decoradores.py
-            |- manipulador_jwt.py
-            |- rotas_autenticacao.py
-        └── flask_api/
-            |- __init__.py
-            |- rotas_api.py
-        └── scraper/
-            |- __init__.py
-            |- obtem_dados_offline.py
-            |- trata_dados.py
-            |- urls.py
-            |- webscraping.py
-        └── scraper/
-            |- test_api.py
-            |- test_scraper.py
-    |- __init__.py
-    |- app.py
-    |- index.py
-    |- requirements.txt
-
+            └── autenticacao/
+            └── flask_api/
+            └── scraper/
+            └── testes/
+        |- app.py
+        |- requirements.txt
     ├── collection_insomnia/
-    |   - collection_insomnia/Insomnia_2025-04-03.yaml
     └── docs/
         └── arquitetura/
-            |-Projeto61.pdf
-            |-Projeto61.drawio 
         └── imagens/
-            |- logo61.png 
-
-    |- gitignore
-    |- estrutura.txt
-    |- note.txt
-    |- pytest.ini
     |- README.md
     |- vercel.json    
 ```
@@ -124,12 +86,24 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
 
 
+## Depêndencias
+
+Para o desenvolvimento deste desafio, foram utilizadas as seguintes bibliotecas e frameworks:
+- Backend: Flask
+- Documentação da API: Flassger - Swagger para Flask
+- Autenticação: Flask-JWT-Extended
+- Modularização: além de separação em componentes, também foi usado Blueprint
+- Registro de Log: Logger
+- Webscraping: BeatifulSoap
+- Testes unitários: Pytest e Unittest
+
+
 ## 🛠️ Instalação do projeto local
 
 Clonando o projeto localmente
 
 ``` bash
-$ git clone https://github.com/Grupo-61/techchalenge01.git
+$ git clone https://github.com/Grupo-61/techchallenge01.git
 ```
 
 Criando um ambiente virtual
@@ -147,92 +121,94 @@ $ source venv/Scripts/activate
 Instalação das depêndências
 
 ``` bash
-$ pip install -r requirements.txt
+$ pip install -r api/requirements.txt
 ```
 
-Executando o servidor Flask a partir do diretório raiz do projeto
+Executando o servidor Flask a partir do diretório raiz do projeto:
 
 ``` bash
-$ flask run
+$ cd api
+$ flask run 
 ```
 
-Ou executar com o debug ativado
+Ou executar com o debug ativado:
 
 ``` bash
+$ cd api
 $ flask run --debug
 ```
 
-Testando as consultas localmente via navegador
+Testando as consultas localmente via Insomnia a seguir.
 
-Link: http://127.0.0.1:5000/comercializacao/ano=2016
+
+## 🌐 Insomnia
+
+Dentro do diretório `collection_insomnia` está disponível o arquivo `Insomnia_2025-05-20.yaml` que é uma `collection do insomnia` contendo as configurações das chamadas à API local e pública, respectivamente, na configuração de ambientes `Local Flask` e `Produção Vercel`. 
+
+Para utilizar a collection é necessário importar o arquivo para o Insomnia. Após configurado é possível acessar os seguintes `endpoints`:
+
+- Login: `/auth/login`
+- Produção: `/producao/ano=<ano>`
+- Processamento: `/processamento/ano=<ano>`
+- Comercialização: `/comercializacao/ano=<ano>`
+- Importação: `/importacao/ano=<ano>`
+- Exportação: `/exportacao/ano=<ano>`
+- Swagger Docs: `/apidocs`
+
+Como todas as rotas precisam que o usuário esteja autenticas, a primeira rota a ser consultada é a `Login`, após obter o token é necessário incluir ele na configuração do `Auth` de cada rota que consulta os dados, em seguida é possível realizar a consulta.
 
 
 ### 📋 Como testar localmente com o Vercel:
 - Instalar Node.js `https://nodejs.org/pt`
 
 1. Instale o Vercel CLI:
-   ```bash
-   npm install -g vercel
+```bash
+$ npm install -g vercel
+```
 
 2. Login no Vercel
 ```bash
-vercel login
-
+$ vercel login
+```
 
 2. Execute o projeto localmente:
-   ```bash
-    vercel dev
+```bash
+$ vercel dev
+```
 
-3. Acesse:
-   ```bash
-    http://localhost:3000/api
+3. Acesse via navegador:
 
-# Depêndencias
+Link: `http://localhost:3000/apidocs`
 
-Para o desenvolvimento deste desafio, foram utilizadas a seguintes bibliotecas e frameworks:
-- Backend: Flask
-- Documentação da API: Flassger - Swagger para Flask
-- Autenticação: Flask-JWT-Extended
-- Modularização: além de separação em componentes, também foi usado Blueprint
-- Registro de Log: Logger
-- Webscraping: BeatifulSoap
+- Na collection do `Insomnia` também tem a configuração para os endpoints apontando para o `Vercel`.
 
 
-## ⚙️ Configuração e implantação 
- ### Vercel
-     - O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
+### ⚙️ Configuração e implantação do Vercel
+- O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel.
 
- ### Testes Unitários
-    - Com as bibliotecas `pytest` e `unittest` instaladas
-    - Executar o seguinte comando no terminal na raiz do projeto
-    - Incluir cenários de testes
+É necessário executar o seguinte comando a partir da raiz do projeto para realizar a implantação no Vercel:
 
 ```bash
-python -m pytest
+$ vercel --prod
 ```
 
-# Autenticação
+## Testes Unitários
+- Com as bibliotecas `pytest` e `unittest` instaladas
+- Executar o seguinte comando no terminal na raiz do projeto
+- 
 
-Autenticação básica com `httpauth`
-
-
-Instalação:
-
-``` bash
-$ pip install flask-httpauth
+```bash
+$ cd api
+$ python -m pytest
 ```
+
 
 ## 📜 Swagger
-    Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
-    [Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
+Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
+[Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
 
-
-## 🌐 Insominia
-    O Insomnia é uma ferramenta para testar APIs REST. Ele permite que você envie requisições HTTP (GET, POST, etc.) para sua API, visualize as respostas, organize coleções de endpoints e simule diferentes cenários de uso, como autenticação, envio de parâmetros e cabeçalhos. No seu projeto, o Insomnia está sendo usado para testar e validar as rotas da API localmente, facilitando o desenvolvimento e o debug
 
 ## ✒️ Autores
-
-## Autores
 
 - [Ana Paula de Almeida](https://github.com/Ana9873P)
 - [Augusto Omena](https://github.com/AugustoOmena)

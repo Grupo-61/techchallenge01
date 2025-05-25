@@ -17,30 +17,35 @@ def producao(ano):
 # processamento
 @rotas_bp.route("/processamento/ano=<int:ano>", methods=['GET'])
 @swag_from("../../apidocs/processamento_doc.yml")
+@token_obrigatorio
 def processamento(ano):
     return obtemJsonPaginas("Processamento", "processamento", ano)
 
 # comercializacao ok
 @rotas_bp.route("/comercializacao/ano=<int:ano>", methods=['GET'])
 @swag_from("../../apidocs/comercializacao_doc.yml")
+@token_obrigatorio
 def comercializacao(ano):
     return obtemJsonPaginas("Comercializacao", "comercializacao", ano)
 
 # importacao
 @rotas_bp.route("/importacao/ano=<int:ano>", methods=['GET'])
 @swag_from("../../apidocs/importacao_doc.yml")
+@token_obrigatorio
 def importacao(ano):
     return obtemJsonPaginas("Importacao", "importacao", ano)
 
 # exportacao
 @rotas_bp.route("/exportacao/ano=<int:ano>", methods=['GET'])
 @swag_from("../../apidocs/exportacao_doc.yml")
+@token_obrigatorio
 def exportacao(ano):
     return obtemJsonPaginas("Exportacao", "exportacao", ano)
 
 
 @rotas_bp.route("/<entidade>/todos", methods=['GET'])
 @swag_from("../../apidocs/entidade_doc.yml")
+@token_obrigatorio
 def dados(entidade):
     # Use lógica para escolher a função correta com base na entidade
     funcoes = {

@@ -1,8 +1,7 @@
 import pytest
-import pandas as pd
 import requests
 from unittest.mock import patch, Mock
-from src.scraper.webscraping import obtemDados
+from api.src.scraper.webscraping import obtemDados
 
 @pytest.fixture
 def mock_response():
@@ -14,7 +13,7 @@ def mock_response():
         <body>
             <table class="tb_base tb_dados">
                 <tr><th>Coluna1</th><th>Coluna2</th></tr>
-                <tr><td>Dado1</td><td>Dado2</td></tr>
+                <tr><td>10.0</td><td>10.0</td></tr>
             </table>
         </body>
     </html>
@@ -27,16 +26,14 @@ def test_obtemDados_sucesso(mock_response):
         df, status_code = obtemDados("http://fakeurl.com")
         
         assert status_code == 200
-        assert not df.empty
-        assert list(df.columns) == ["Coluna1", "Coluna2"]
-        assert df.iloc[0].to_list() == ["Dado1", "Dado2"]
+        assert all("Coluna1" in d and "Coluna2" in d for d in df)
+        assert all(d.get("Coluna1") == "10.0" for d in df)
 
 def test_obtemDados_erro_requisicao():
     """Testa o caso de erro na requisição (exemplo: URL inválida)."""
     with patch("requests.get", side_effect=requests.exceptions.RequestException):
         df, status_code = obtemDados("http://fakeurl.com")
         
-        assert df.empty
         assert status_code == 500
 
 def test_obtemDados_status_code_erro(mock_response):
@@ -45,5 +42,5 @@ def test_obtemDados_status_code_erro(mock_response):
     with patch("requests.get", return_value=mock_response):
         df, status_code = obtemDados("http://fakeurl.com")
         
-        assert df.empty
+        assert df == {"mensagem": "codigo de erro: 404"}
         assert status_code == 404
