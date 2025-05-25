@@ -58,6 +58,7 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 .
 └── TECHCHALLENGE01/
     ├── api/
+    └── apidocs/
     └── dados/
        └── dados_offline/
             └── comercializacao/
@@ -70,6 +71,7 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
             └── flask_api/
             └── scraper/
             └── testes/
+            └── utils/
         |- app.py
         |- requirements.txt
     ├── collection_insomnia/
@@ -86,10 +88,11 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
 
 
-## Depêndencias
+## Dependências
 
 Para o desenvolvimento deste desafio, foram utilizadas as seguintes bibliotecas e frameworks:
-- Backend: Flask
+
+- Backend:Flask
 - Documentação da API: Flassger - Swagger para Flask
 - Autenticação: Flask-JWT-Extended
 - Modularização: além de separação em componentes, também foi usado Blueprint
@@ -155,7 +158,7 @@ Para utilizar a collection é necessário importar o arquivo para o Insomnia. Ap
 - Exportação: `/exportacao/ano=<ano>`
 - Swagger Docs: `/apidocs`
 
-Como todas as rotas precisam que o usuário esteja autenticas, a primeira rota a ser consultada é a `Login`, após obter o token é necessário incluir ele na configuração do `Auth` de cada rota que consulta os dados, em seguida é possível realizar a consulta.
+Para acessar as rotas é preciso primeiramente que o usuário esteja autenticado - para isso, deve ser acessada a rota `Login` que, ao retornar o token, ele possa ser incluído na configuração do `Auth` das demais rotas da API. Uma vez o usuário autenticado, as demais rotas podem ser utlizadas para realizar consultas aos dados.
 
 
 ### 📋 Como testar localmente com o Vercel:
@@ -210,12 +213,13 @@ Utilizado para documentar automaticamente todas as rotas da API Flask, facilitan
 
 ## ✒️ Autores
 
-- [Ana Paula de Almeida](https://github.com/Ana9873P)
-- [Augusto Omena](https://github.com/AugustoOmena)
-- [Bruno Gabriel de Oliveira](https://github.com/brunogabrieldeoliveira)
-- [José Walmir Gonçalves Duque](https://github.com/WALMIRDUQUE)
-- [Pedro Henrique da Costa Ulisses](https://github.com/ordepzero)
-
+| Nome                            |   RM    | Link do GitHub                                |
+|---------------------------------|---------|-----------------------------------------------|
+| Ana Paula de Almeida            | 363602  | [](https://github.com/Ana9873P)               |
+| Augusto do Nascimento Omena     | 363185  | [](https://github.com/AugustoOmena)           |
+| Bruno Gabriel de Oliveira       | 361248  | [](https://github.com/brunogabrieldeoliveira) |
+| José Walmir Gonçalves Duque     | 363196  | [](https://github.com/WALMIRDUQUE)            |
+| Pedro Henrique da Costa Ulisses | 360864  | [](https://github.com/ordepzero)              |
 
 ## 📄 Licença
 
