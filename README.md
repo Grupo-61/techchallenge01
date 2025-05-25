@@ -211,6 +211,10 @@ Utilizado para documentar automaticamente todas as rotas da API Flask, facilitan
 [Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
 
 
+## Vídeo de Apresentação no Youtube
+Para melhor compreensão da entrega, foi produzido um vídeo de apresentação que foi publicado no Youtube:
+[Link para a Vídeo]()
+
 ## ✒️ Autores
 
 | Nome                            |   RM    | Link do GitHub                                      |
