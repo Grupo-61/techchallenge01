@@ -60,46 +60,22 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
     ├── api/
     └── dados/
        └── dados_offline/
-          └── comercializacao/
-          └── exportacao/
-          └── importacao/
-          └── processamento/
-          └── producao/
+            └── comercializacao/
+            └── exportacao/
+            └── importacao/
+            └── processamento/
+            └── producao/
         ├── src/
-        └── autenticacao/
-            |- __init__.py
-            |- decoradores.py
-            |- manipulador_jwt.py
-            |- rotas_autenticacao.py
-        └── flask_api/
-            |- __init__.py
-            |- rotas_api.py
-        └── scraper/
-            |- __init__.py
-            |- obtem_dados_offline.py
-            |- urls.py
-            |- webscraping.py
-        └── scraper/
-            |- test_api.py
-            |- test_scraper.py
-    |- __init__.py
-    |- app.py
-    |- index.py
-    |- requirements.txt
-
+            └── autenticacao/
+            └── flask_api/
+            └── scraper/
+            └── testes/
+        |- app.py
+        |- requirements.txt
     ├── collection_insomnia/
-    |   - Insomnia_2025-04-03.yaml
     └── docs/
         └── arquitetura/
-            |-Projeto61.pdf
-            |-Projeto61.drawio 
         └── imagens/
-            |- logo61.png 
-
-    |- gitignore
-    |- estrutura.txt
-    |- note.txt
-    |- pytest.ini
     |- README.md
     |- vercel.json    
 ```
@@ -108,6 +84,18 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 ## 🔩 Arquitetura da solução
 
 A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
+
+
+## Depêndencias
+
+Para o desenvolvimento deste desafio, foram utilizadas as seguintes bibliotecas e frameworks:
+- Backend: Flask
+- Documentação da API: Flassger - Swagger para Flask
+- Autenticação: Flask-JWT-Extended
+- Modularização: além de separação em componentes, também foi usado Blueprint
+- Registro de Log: Logger
+- Webscraping: BeatifulSoap
+- Testes unitários: Pytest e Unittest
 
 
 ## 🛠️ Instalação do projeto local
@@ -150,9 +138,22 @@ $ cd api
 $ flask run --debug
 ```
 
-Testando as consultas localmente via navegador
+Testando as consultas localmente via Insomnia a seguir.
 
-Link: `http://127.0.0.1:5000/comercializacao/ano=2016`
+
+## 🌐 Insomnia
+
+Dentro do diretório `collection_insomnia` está disponível o arquivo `Insomnia_2025-05-20.yaml` que é uma `collection do insomnia` contendo as configurações das chamadas à API local e pública, respectivamente, na configuração de ambientes `Local Flask` e `Produção Vercel`. 
+
+Para utilizar a collection é necessário importar o arquivo para o Insomnia. Após configurado é possível acessar os seguintes `endpoints`:
+
+- Login: `/auth/login`
+- Produção: `/producao/ano=<ano>`
+- Processamento: `/processamento/ano=<ano>`
+- Comercialização: `/comercializacao/ano=<ano>`
+- Importação: `/importacao/ano=<ano>`
+- Exportação: `/exportacao/ano=<ano>`
+- Swagger Docs: `/apidocs`
 
 
 ### 📋 Como testar localmente com o Vercel:
@@ -177,62 +178,28 @@ $ vercel dev
 
 `http://localhost:3000/`
 
-### Depêndencias
-
-- Flask
-- Flasgger
-- Flask-JWT-Extended
-- Beautifulsoup4
-- Pytest
-Para o desenvolvimento deste desafio, foram utilizadas a seguintes bibliotecas e frameworks:
-- Backend: Flask
-- Documentação da API: Flassger - Swagger para Flask
-- Autenticação: Flask-JWT-Extended
-- Modularização: além de separação em componentes, também foi usado Blueprint
-- Registro de Log: Logger
-- Webscraping: BeatifulSoap
 
 
-## ⚙️ Configuração e implantação 
- ### Vercel
-     - O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
+### ⚙️ Configuração e implantação do Vercel
+- O arquivo vercel.json configura o Vercel para rodar o arquivo app.py como ponto de entrada da aplicação, expondo as rotas Flask para acesso externo via URL gerada pelo Vercel. Assim, ao fazer deploy, a API fica acessível publicamente pelo endereço fornecido pela Vercel
 
- ### Testes Unitários
-    - Com as bibliotecas `pytest` e `unittest` instaladas
-    - Executar o seguinte comando no terminal na raiz do projeto
-    - Incluir cenários de testes
+## Testes Unitários
+- Com as bibliotecas `pytest` e `unittest` instaladas
+- Executar o seguinte comando no terminal na raiz do projeto
+- 
 
 ```bash
 $ cd api
 $ python -m pytest
 ```
 
-## Autenticação
-
 
 ## 📜 Swagger
-    Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
-    [Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
-
-
-## 🌐 Insominia
-
-Dentro do diretório `collection_insomnia` está disponível o arquivo `Insomnia_2025-05-20.yaml` que é uma `collection do insomnia` contendo as configurações das chamadas à API local e pública, respectivamente na configuração de ambientes `Local Flask` e `Produção Vercel`. 
-
-Para utilizar a collection é necessário importar o arquivo para o Insomnia. Após configurado é possível acessar os seguintes `endpoints`:
-
-- Login: `/auth/login`
-- Produção: `/producao/ano=<ano>`
-- Processamento: `/processamento/ano=<ano>`
-- Comercialização: `/comercializacao/ano=<ano>`
-- Importação: `/importacao/ano=<ano>`
-- Exportação: `/exportacao/ano=<ano>`
-- Swagger Docs: `/apidocs`
+Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
+[Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
 
 
 ## ✒️ Autores
-
-## Autores
 
 - [Ana Paula de Almeida](https://github.com/Ana9873P)
 - [Augusto Omena](https://github.com/AugustoOmena)
