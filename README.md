@@ -215,11 +215,11 @@ Utilizado para documentar automaticamente todas as rotas da API Flask, facilitan
 
 | Nome                            |   RM    | Link do GitHub                                      |
 |---------------------------------|---------|-----------------------------------------------------|
-| Ana Paula de Almeida            | 363602  |  [![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)] https://github.com/Ana9873P) |
-| Augusto do Nascimento Omena     | 363185  | [![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)] (https://github.com/AugustoOmena)           |
-| Bruno Gabriel de Oliveira       | 361248  | [![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)] (https://github.com/brunogabrieldeoliveira) |
-| José Walmir Gonçalves Duque     | 363196  | [![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)] (https://github.com/WALMIRDUQUE)            |
-| Pedro Henrique da Costa Ulisses | 360864  | [![GitHub](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)] (https://github.com/ordepzero)              |
+| Ana Paula de Almeida            | 363602  | [GitHub](https://github.com/Ana9873P)               |
+| Augusto do Nascimento Omena     | 363185  | [GitHub](https://github.com/AugustoOmena)           |
+| Bruno Gabriel de Oliveira       | 361248  | [GitHub](https://github.com/brunogabrieldeoliveira) |
+| José Walmir Gonçalves Duque     | 363196  | [GitHub](https://github.com/WALMIRDUQUE)            |
+| Pedro Henrique da Costa Ulisses | 360864  | [GitHub](https://github.com/ordepzero)              |
 
 ## 📄 Licença
 
