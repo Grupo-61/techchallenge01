@@ -77,7 +77,11 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
     ├── collection_insomnia/
     └── docs/
         └── arquitetura/
+        └── cenariosML/
         └── imagens/
+        └── license/
+    |- pytest.ini
+    |- notes.txt
     |- README.md
     |- vercel.json    
 ```
