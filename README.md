@@ -41,7 +41,7 @@ A API desenvolvida será utilizada para alimentar uma base de dados que servirá
 - Falta de padronização para acesso aos dados bem como tipos de retornos e formatos mais adequados para consumo na produção de relatórios e analytics.
 - Suporte e documentação insuficientes.
 - Indisponibilidade de dados por instabilidade do site da Embrapa.
-- Ausência de método de autenticação para acesso ados dados.
+- Ausência de método de autenticação para acesso aos dados.
 
 ## Proposta de solução
 
@@ -126,6 +126,7 @@ Instalação das depêndências
 ``` bash
 $ pip install -r api/requirements.txt
 ```
+[Link para a requirements.txt](https://github.com/Grupo-61/techchallenge01/tree/main/docs/requirements.txt)
 
 Executando o servidor Flask a partir do diretório raiz do projeto:
 
