@@ -89,8 +89,15 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 
 ## 🔩 Arquitetura da solução
 
-A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto61.pdf)
+A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto_61_v2.png)
 
+
+## Cenários de Machine Learning
+
+Também foi demandado para o desafio propor protótipo de Modelo de Machine Learning usando a API como fonte.
+Para este intento, foi construído um documento explicativo dos cenários possíveis e um código Python com um protótipo implementado para um exemplo de Modelo aplicável. Seguem links:
+ [Link para o Documento de Cenários de ML](https://github.com/Grupo-61/techchallenge01/blob/main/docs/cenariosML/Tech%20Challenge%2001%20-%20CenarioML.pdf)
+ [Link para o Código Python](inserir)
 
 ## Dependências
 
@@ -130,7 +137,7 @@ Instalação das depêndências
 ``` bash
 $ pip install -r api/requirements.txt
 ```
-[Link para baixar requirements.txt](https://github.com/Grupo-61/techchallenge01/tree/main/docs/requirements.txt)
+[Link para baixar requirements.txt](https://github.com/Grupo-61/techchallenge01/blob/main/requirements.txt)
 
 Executando o servidor Flask a partir do diretório raiz do projeto:
 
