@@ -130,7 +130,7 @@ Instalação das depêndências
 ``` bash
 $ pip install -r api/requirements.txt
 ```
-[Link para a requirements.txt](https://github.com/Grupo-61/techchallenge01/tree/main/docs/requirements.txt)
+[Link para baixar requirements.txt](https://github.com/Grupo-61/techchallenge01/tree/main/docs/requirements.txt)
 
 Executando o servidor Flask a partir do diretório raiz do projeto:
 
