@@ -20,8 +20,6 @@ A proposta do projeto é criar uma **API pública** para consulta nos dados disp
 - Importação
 - Exportação
 
-**Link do site:** [Embrapa Vitivinicultura](http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_01)
-
 A API desenvolvida será utilizada para alimentar uma base de dados que servirá para um modelo de **Machine Learning**.
 
 ## 📌 Objetivos
@@ -222,12 +220,15 @@ $ python -m pytest
 
 ## 📜 Swagger
 Utilizado para documentar automaticamente todas as rotas da API Flask, facilitando o uso e integração com outras aplicações. Essa documentação torna mais compreensível os parâmetros de chamada e retornos.
+
 [Link para a Documentação](https://techchallenge01-ulissesphs-projects.vercel.app/apidocs/)
 
 
 ## Vídeo de Apresentação no Youtube
 Para melhor compreensão da entrega, foi produzido um vídeo de apresentação que foi publicado no Youtube:
+
 [Link para a Vídeo]()
+
 
 ## ✒️ Autores
 
