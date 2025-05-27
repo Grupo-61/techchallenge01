@@ -90,7 +90,6 @@ Em face ao desafio proposto, algumas funcionalidades propostas para a API são:
 A arquitetura da solução foi desenhada sob uma abordagem End-to-end e consta na pasta de documentação deste repositório. [Link para o Diagrama](https://github.com/Grupo-61/techchallenge01/blob/main/docs/arquitetura/Projeto_61_v2.png)
 
 
-
 ## Cenários de Machine Learning
 
 Também foi demandado para o desafio propor protótipo de Modelo de Machine Learning usando a API como fonte.
