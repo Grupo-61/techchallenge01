@@ -28,7 +28,7 @@ def salvar_arquivo_json(dados, tipo, ano, aba):
 def obtem_dados_offline(tipo, ano, aba):
 
     nome_arquivo = f"{tipo}_{ano}_{aba}.json"
-    caminho_arquivo = f"dados/dados_offline/{tipo}/{nome_arquivo}"
+    caminho_arquivo = f"api/dados/dados_offline/{tipo}/{nome_arquivo}"
 
     log.info(f"Recuperando arquivo {caminho_arquivo} offline.")
     
