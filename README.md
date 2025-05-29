@@ -226,7 +226,7 @@ Utilizado para documentar automaticamente todas as rotas da API Flask, facilitan
 ## Vídeo de Apresentação no Youtube
 Para melhor compreensão da entrega, foi produzido um vídeo de apresentação que foi publicado no Youtube:
 
-[Link para a Vídeo]()
+[Link para a Vídeo](https://youtu.be/vcK44DGsT4I)
 
 
 ## ✒️ Autores
